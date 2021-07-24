@@ -1,7 +1,8 @@
-package com.rahul.nobrokerapp
+package com.rahul.nobrokerapp.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rahul.nobrokerapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
