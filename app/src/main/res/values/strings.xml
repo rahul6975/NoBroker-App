@@ -4,4 +4,5 @@
     <string name="sub_title">sub title</string>
     <string name="item_list">Item List</string>
     <string name="search_title_or_description">search title or description</string>
+    <string name="item_detail">Item Detail</string>
 </resources>

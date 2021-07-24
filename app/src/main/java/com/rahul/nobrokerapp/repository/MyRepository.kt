@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class MyRepository(val listDao: ListDao) {
+class MyRepository(private val listDao: ListDao) {
 
     private val apiClient = Network.getInstance()
         .create(ApiClient::class.java)

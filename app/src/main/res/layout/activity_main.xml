@@ -25,6 +25,7 @@
         android:layout_height="@dimen/dp_40"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
         android:background="@drawable/curve_bg"
         android:drawableStart="@drawable/search"
         android:fontFamily="sans-serif-condensed"
