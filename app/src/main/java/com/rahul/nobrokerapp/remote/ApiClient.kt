@@ -9,5 +9,6 @@ import retrofit2.http.GET
 interface ApiClient {
 
     @GET("b/60fa8fefa917050205ce5470")
-    fun getResponse(): Call<ResponseClass>
+    suspend fun getResponse(
+    ): ResponseClass
 }
