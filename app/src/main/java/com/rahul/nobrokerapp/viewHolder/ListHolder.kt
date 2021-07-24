@@ -21,6 +21,7 @@ class ListHolder(private val view: View, private val clickListener: ClickListene
                 stringBuilder.append(stringArray[i]+" ")
             }
             tvSubTitle.text = stringBuilder.toString()
+//            tvSubTitle.text = listEntity.subtitle
         }
         view.setOnClickListener {
             clickListener.onClick(adapterPosition)

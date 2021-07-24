@@ -56,7 +56,8 @@ class MainActivity : AppCompatActivity(), ClickListener {
         viewModel.displayList().observe(this, Observer {
             userList = it
             listAdapter.updateList(userList)
-            progressBar.visibility = View.GONE
+            shimmerFrameLayout.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
         })
     }
 
@@ -78,5 +79,15 @@ class MainActivity : AppCompatActivity(), ClickListener {
         intent.putExtra("title", userList[position].title)
         intent.putExtra("subtitle", userList[position].subtitle)
         startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        shimmerFrameLayout.startShimmer()
+    }
+
+    override fun onPause() {
+        shimmerFrameLayout.stopShimmer()
+        super.onPause()
     }
 }

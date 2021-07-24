@@ -28,4 +28,5 @@ class AfterClickActivity : AppCompatActivity() {
         textViewTitle.text = title
         textViewSubtitle.text = subtitle
     }
+
 }
