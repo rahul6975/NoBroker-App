@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -23,12 +25,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), ClickListener {
     lateinit var listApplication: MyApplication
     lateinit var myRepository: MyRepository
     private var userList = emptyList<ListEntity>()
     lateinit var listAdapter: ListAdapter
+    private lateinit var newList: ArrayList<ListEntity>
+    private lateinit var tempArrayList: ArrayList<ListEntity>
     lateinit var viewModel: MyViewModel
     lateinit var viewModelFactory: ViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +57,44 @@ class MainActivity : AppCompatActivity(), ClickListener {
         } else {
             fetchDataFromDB()
         }
+
+        etSearch.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    tempArrayList.clear()
+                    val searchText = s.toString().lowercase(Locale.getDefault())
+                    if (searchText.isNotEmpty()) {
+                        newList.forEach {
+                            if (it.title.lowercase(Locale.getDefault()).contains(searchText)
+                                || it.subtitle.lowercase(Locale.getDefault()).contains(searchText)
+                            ) {
+                                tempArrayList.add(it)
+                            }
+                        }
+                        listAdapter.notifyDataSetChanged()
+                    } else {
+                        tempArrayList.clear()
+                        tempArrayList.addAll(newList)
+                        listAdapter.notifyDataSetChanged()
+                    }
+
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+
+
     }
 
     private fun setRecycler() {
@@ -71,7 +115,9 @@ class MainActivity : AppCompatActivity(), ClickListener {
     private fun fetchDataFromDB() {
         viewModel.displayList().observe(this, Observer {
             userList = it
-            listAdapter.updateList(userList)
+            newList.addAll(it)
+            tempArrayList.addAll(it)
+            listAdapter.updateList(tempArrayList)
             shimmer.stopShimmer()
             shimmer.visibility = View.GONE
             recyclerView.visibility = View.VISIBLE
@@ -88,6 +134,10 @@ class MainActivity : AppCompatActivity(), ClickListener {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(MyViewModel::class.java)
+
+        tempArrayList = arrayListOf<ListEntity>()
+        newList = arrayListOf<ListEntity>()
+
     }
 
     override fun onClick(position: Int) {
