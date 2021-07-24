@@ -8,6 +8,7 @@ import com.rahul.nobrokerapp.room.ListEntity
 import kotlinx.android.synthetic.main.item_layout.view.*
 import java.lang.StringBuilder
 
+//ViewHolder class which holds the data in our recycler view
 class ListHolder(private val view: View, private val clickListener: ClickListener) :
     RecyclerView.ViewHolder(view) {
 
@@ -18,10 +19,9 @@ class ListHolder(private val view: View, private val clickListener: ClickListene
             var stringBuilder = StringBuilder()
             var stringArray = listEntity.subtitle.split(" ")
             for (i in 0..stringArray.size / 4) {
-                stringBuilder.append(stringArray[i]+" ")
+                stringBuilder.append(stringArray[i] + " ")
             }
             tvSubTitle.text = stringBuilder.toString()
-//            tvSubTitle.text = listEntity.subtitle
         }
         view.setOnClickListener {
             clickListener.onClick(adapterPosition)

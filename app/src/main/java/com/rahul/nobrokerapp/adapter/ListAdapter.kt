@@ -8,6 +8,7 @@ import com.rahul.nobrokerapp.interfaces.ClickListener
 import com.rahul.nobrokerapp.room.ListEntity
 import com.rahul.nobrokerapp.viewHolder.ListHolder
 
+//adapter for our recycler view
 class ListAdapter(
     private var responseList: List<ListEntity>,
     private val clickListener: ClickListener
@@ -27,6 +28,7 @@ class ListAdapter(
         return responseList.size
     }
 
+    //updates the latest data of the list
     fun updateList(itemList: List<ListEntity>) {
         responseList = itemList
         notifyDataSetChanged()

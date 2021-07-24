@@ -29,6 +29,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), ClickListener {
+
     lateinit var listApplication: MyApplication
     lateinit var myRepository: MyRepository
     private var userList = emptyList<ListEntity>()
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
     private lateinit var tempArrayList: ArrayList<ListEntity>
     lateinit var viewModel: MyViewModel
     lateinit var viewModelFactory: ViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
         setRecycler()
         fetchDataFromDB()
 
+        //checks if internet access if available, if yes then call the api or else get data from database
         val ConnectionManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = ConnectionManager.activeNetworkInfo
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
             fetchDataFromDB()
         }
 
+        //watch the changes in the edittext and filter recyclerview according
         etSearch.addTextChangedListener(
             object : TextWatcher {
                 override fun beforeTextChanged(
@@ -97,6 +101,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
 
     }
 
+    //sets the recyclerview
     private fun setRecycler() {
         listAdapter = ListAdapter(userList, this)
         val layoutManager = LinearLayoutManager(this)
@@ -112,6 +117,8 @@ class MainActivity : AppCompatActivity(), ClickListener {
         }
     }
 
+
+    //fetches the data from database
     private fun fetchDataFromDB() {
         viewModel.displayList().observe(this, Observer {
             userList = it
@@ -125,6 +132,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
     }
 
 
+    //initialize variables
     private fun initialize() {
         listApplication = application as MyApplication
 
@@ -140,6 +148,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
 
     }
 
+    // overriding onClick function from our interface
     override fun onClick(position: Int) {
         val intent = Intent(this, AfterClickActivity::class.java)
         intent.putExtra("url", userList[position].url)

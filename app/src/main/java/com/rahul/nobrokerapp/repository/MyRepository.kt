@@ -10,7 +10,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
+/**
+ * This is a `M` layer in the `MVVM` architecture which gives us the data from the API
+ */
 class MyRepository(private val listDao: ListDao) {
 
     private val apiClient = Network.getInstance()
@@ -23,8 +25,8 @@ class MyRepository(private val listDao: ListDao) {
         addList(result)
     }
 
+    //adds the list into the room database
     private fun addList(result: List<ResponseClass>) {
-
         for (i in 0..result.size - 1) {
             val listEntity =
                 ListEntity(result.get(i).image!!, result.get(i).title!!, result.get(i).subTitle!!)
@@ -32,6 +34,7 @@ class MyRepository(private val listDao: ListDao) {
         }
     }
 
+    //livedata which provides the list of data present inside database
     fun displayList(): LiveData<List<ListEntity>> {
         return listDao.getList()
     }

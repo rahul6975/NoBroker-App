@@ -5,7 +5,11 @@ import androidx.lifecycle.ViewModel
 import com.rahul.nobrokerapp.repository.MyRepository
 import com.rahul.nobrokerapp.room.ListEntity
 
-class MyViewModel(val repository: MyRepository) : ViewModel() {
+/**
+ * This is a VM layer in the `MVVM` architecture, where we are notifying the Activity/view about the
+ * response changes via live data
+ */
+class MyViewModel(private val repository: MyRepository) : ViewModel() {
 
     suspend fun getApi() {
         repository.getList()

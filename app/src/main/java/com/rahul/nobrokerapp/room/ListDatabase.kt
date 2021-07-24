@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+//database class which returns the instance of our database
 @Database(entities = [ListEntity::class], version = 1)
 abstract class ListDatabase : RoomDatabase() {
 

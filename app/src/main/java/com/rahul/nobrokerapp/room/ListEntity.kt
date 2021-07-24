@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+//Entity which represents the database in form of table
 @Entity(tableName = "list_table")
 data class ListEntity(
     @ColumnInfo(name = "url") var url: String,
