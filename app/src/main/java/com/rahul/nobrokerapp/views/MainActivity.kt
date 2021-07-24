@@ -1,5 +1,6 @@
 package com.rahul.nobrokerapp.views
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -72,6 +73,10 @@ class MainActivity : AppCompatActivity(), ClickListener {
     }
 
     override fun onClick(position: Int) {
-        Toast.makeText(this, "$position", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, AfterClickActivity::class.java)
+        intent.putExtra("url", userList[position].url)
+        intent.putExtra("title", userList[position].title)
+        intent.putExtra("subtitle", userList[position].subtitle)
+        startActivity(intent)
     }
 }
