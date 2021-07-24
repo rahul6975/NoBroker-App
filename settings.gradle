@@ -1,0 +1,2 @@
+rootProject.name = "NoBroker App"
+include ':app'
