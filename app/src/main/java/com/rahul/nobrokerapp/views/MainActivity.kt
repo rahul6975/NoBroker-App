@@ -1,13 +1,17 @@
 package com.rahul.nobrokerapp.views
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.facebook.shimmer.Shimmer
 import com.rahul.nobrokerapp.R
 import com.rahul.nobrokerapp.interfaces.ClickListener
 import com.rahul.nobrokerapp.adapter.ListAdapter
@@ -34,12 +38,18 @@ class MainActivity : AppCompatActivity(), ClickListener {
         setRecycler()
         fetchDataFromDB()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getApi()
-            runOnUiThread {
-                fetchDataFromDB()
-
+        val ConnectionManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = ConnectionManager.activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected == true) {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.getApi()
+                runOnUiThread {
+                    fetchDataFromDB()
+                }
             }
+        } else {
+            fetchDataFromDB()
         }
     }
 
@@ -49,6 +59,12 @@ class MainActivity : AppCompatActivity(), ClickListener {
         recyclerView.apply {
             this.layoutManager = layoutManager
             adapter = listAdapter
+            recyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    recyclerView.context,
+                    (recyclerView.layoutManager as LinearLayoutManager).orientation
+                )
+            )
         }
     }
 
@@ -56,7 +72,8 @@ class MainActivity : AppCompatActivity(), ClickListener {
         viewModel.displayList().observe(this, Observer {
             userList = it
             listAdapter.updateList(userList)
-            shimmerFrameLayout.visibility = View.GONE
+            shimmer.stopShimmer()
+            shimmer.visibility = View.GONE
             recyclerView.visibility = View.VISIBLE
         })
     }
@@ -82,12 +99,12 @@ class MainActivity : AppCompatActivity(), ClickListener {
     }
 
     override fun onResume() {
+        shimmer.startShimmer()
         super.onResume()
-        shimmerFrameLayout.startShimmer()
     }
 
     override fun onPause() {
-        shimmerFrameLayout.stopShimmer()
+        shimmer.stopShimmer()
         super.onPause()
     }
 }

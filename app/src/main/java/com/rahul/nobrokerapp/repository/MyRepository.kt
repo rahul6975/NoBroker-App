@@ -25,20 +25,9 @@ class MyRepository(val listDao: ListDao) {
 
     private fun addList(result: List<ResponseClass>) {
 
-//        val listEntity = result.image?.let {
-//            result.title?.let { it1 ->
-//                result.subTitle?.let { it2 ->
-//                    ListEntity(
-//                        it,
-//                        it1, it2
-//                    )
-//                }
-//            }
-//        }
         for (i in 0..result.size - 1) {
             val listEntity =
                 ListEntity(result.get(i).image!!, result.get(i).title!!, result.get(i).subTitle!!)
-//            CoroutineScope(Dispatchers.IO).launch {
             listDao.addList(listEntity)
         }
     }
