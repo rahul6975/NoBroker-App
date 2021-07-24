@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rahul.nobrokerapp.R
-import com.rahul.nobrokerapp.`interface`.ClickListener
-import com.rahul.nobrokerapp.modelClass.ResponseClass
-import com.rahul.nobrokerapp.room.entity.ListEntity
+import com.rahul.nobrokerapp.interfaces.ClickListener
+import com.rahul.nobrokerapp.room.ListEntity
 import com.rahul.nobrokerapp.viewHolder.ListHolder
 
 class ListAdapter(

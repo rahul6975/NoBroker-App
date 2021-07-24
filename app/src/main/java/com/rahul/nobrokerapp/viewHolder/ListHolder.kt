@@ -3,9 +3,8 @@ package com.rahul.nobrokerapp.viewHolder
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rahul.nobrokerapp.`interface`.ClickListener
-import com.rahul.nobrokerapp.modelClass.ResponseClass
-import com.rahul.nobrokerapp.room.entity.ListEntity
+import com.rahul.nobrokerapp.interfaces.ClickListener
+import com.rahul.nobrokerapp.room.ListEntity
 import kotlinx.android.synthetic.main.item_layout.view.*
 
 class ListHolder(private val view: View, private val clickListener: ClickListener) :

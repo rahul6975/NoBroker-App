@@ -2,9 +2,8 @@ package com.rahul.nobrokerapp.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.rahul.nobrokerapp.modelClass.ResponseClass
 import com.rahul.nobrokerapp.repository.MyRepository
-import com.rahul.nobrokerapp.room.entity.ListEntity
+import com.rahul.nobrokerapp.room.ListEntity
 
 class MyViewModel(val repository: MyRepository) : ViewModel() {
 
@@ -12,7 +11,7 @@ class MyViewModel(val repository: MyRepository) : ViewModel() {
         repository.getList()
     }
 
-    fun displayList(): LiveData<ListEntity> {
+    fun displayList(): LiveData<List<ListEntity>> {
         return repository.displayList()
     }
 }

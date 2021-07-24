@@ -2,7 +2,7 @@ package com.rahul.nobrokerapp.views
 
 import android.app.Application
 import com.rahul.nobrokerapp.repository.MyRepository
-import com.rahul.nobrokerapp.room.database.ListDatabase
+import com.rahul.nobrokerapp.room.ListDatabase
 
 class MyApplication : Application() {
     val listDao by lazy {
