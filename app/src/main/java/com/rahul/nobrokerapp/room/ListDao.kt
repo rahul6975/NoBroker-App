@@ -14,7 +14,7 @@ interface ListDao {
     suspend fun addList(listEntity: ListEntity)
 
     /*
-   This will return a LiveData<List<Users>> , so whenever the database is changed the observer
+   This will return a LiveData<List<ListEntity>> , so whenever the database is changed the observer
    is notified
     */
     @Query("select * from list_table")

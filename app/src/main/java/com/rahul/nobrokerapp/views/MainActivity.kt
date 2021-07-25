@@ -84,11 +84,9 @@ class MainActivity : AppCompatActivity(), ClickListener {
                         if checkIfThereInDatabase is not null means database contains previous data,
                         so we don't need to hit api again and directly fetch the data from database
                          */
-
                         fetchDataFromDB()
                     }
                 }
-
             })
         }
 
@@ -122,14 +120,9 @@ class MainActivity : AppCompatActivity(), ClickListener {
                     }
 
                 }
-
                 override fun afterTextChanged(s: Editable?) {
-
                 }
-
             })
-
-
     }
 
     //sets the recyclerview
