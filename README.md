@@ -14,19 +14,13 @@ This is an android demo project based on modern Android application tech-stacks 
   <tr>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/one.jpg" width="200"/></td>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/two.jpg" width="200"/></td>
-  </tr>
-  
-  <tr>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/three.jpg" width="200"/></td>
-    <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/four.jpg" width="200"/></td>
   </tr>
   
   <tr>
+    <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/four.jpg" width="200"/></td>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/five.gif" width="200"/></td>
   </tr>
-  
-   
-  
  </table>
 
 ## Libraries & Tech Used
@@ -39,7 +33,7 @@ This is an android demo project based on modern Android application tech-stacks 
 - Architecture
   - MVVM Architecture (View - ViewModel) 
 - [Retrofit](https://square.github.io/retrofit/) - for getting response from API
-- [Room](https://developer.android.com/training/data-storage/room) - for storing response locally. 
+- [Room](https://developer.android.com/training/data-storage/room) - for storing response locally and access offline. 
 - [Glide](https://github.com/bumptech/glide) - loading images.
 
 ## Video
