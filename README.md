@@ -14,19 +14,13 @@ This is an android demo project based on modern Android application tech-stacks 
   <tr>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/one.jpg" width="200"/></td>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/two.jpg" width="200"/></td>
-  </tr>
-  
-  <tr>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/three.jpg" width="200"/></td>
-    <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/four.jpg" width="200"/></td>
   </tr>
   
   <tr>
+    <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/four.jpg" width="200"/></td>
     <td><img src="https://github.com/rahul6975/NoBroker-App/blob/master/screenshots/five.gif" width="200"/></td>
   </tr>
-  
-   
-  
  </table>
 
 ## Libraries & Tech Used
