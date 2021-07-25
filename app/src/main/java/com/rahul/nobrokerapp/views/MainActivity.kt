@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
     private lateinit var tempArrayList: ArrayList<ListEntity>
     lateinit var viewModel: MyViewModel
     lateinit var viewModelFactory: ViewModelFactory
+    var checkIfThereInDatabase: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,21 +49,50 @@ class MainActivity : AppCompatActivity(), ClickListener {
         fetchDataFromDB()
 
         //checks if internet access if available, if yes then call the api or else get data from database
+
         val ConnectionManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = ConnectionManager.activeNetworkInfo
         if (networkInfo != null && networkInfo.isConnected == true) {
-            CoroutineScope(Dispatchers.IO).launch {
-                viewModel.getApi()
-                runOnUiThread {
-                    fetchDataFromDB()
+
+            viewModel.displayList().observe(this, Observer {
+
+                /*
+                if launching app for the first time then it[0].title will throw index out of bound exception
+                so we catch it and it the api and not let our app crash
+                 */
+                try {
+                    checkIfThereInDatabase = it[0].title
+                } catch (e: Exception) {
+                    if (checkIfThereInDatabase == null) {
+
+                        /*
+                         if internet access is there and also database contains previous data then delete all
+                         data from database and hit the api and store the new list into database
+                          */
+                        CoroutineScope(Dispatchers.IO).launch {
+                            viewModel.deleteList()
+                        }
+                        CoroutineScope(Dispatchers.IO).launch {
+                            viewModel.getApi()
+                            runOnUiThread {
+                                fetchDataFromDB()
+                            }
+                        }
+                    } else {
+                        /*
+                        if checkIfThereInDatabase is not null means database contains previous data,
+                        so we don't need to hit api again and directly fetch the data from database
+                         */
+
+                        fetchDataFromDB()
+                    }
                 }
-            }
-        } else {
-            fetchDataFromDB()
+
+            })
         }
 
-        //watch the changes in the edittext and filter recyclerview according
+        //watch the changes in the edittext and filter recyclerview accordingly
         etSearch.addTextChangedListener(
             object : TextWatcher {
                 override fun beforeTextChanged(
@@ -158,12 +189,12 @@ class MainActivity : AppCompatActivity(), ClickListener {
     }
 
     override fun onResume() {
-        shimmer.startShimmer()
+        shimmer.startShimmer()    // starts our shimmer effect
         super.onResume()
     }
 
     override fun onPause() {
-        shimmer.stopShimmer()
+        shimmer.stopShimmer()    // stop our shimmer effect when activity is paused
         super.onPause()
     }
 }

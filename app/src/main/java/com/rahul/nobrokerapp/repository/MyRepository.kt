@@ -26,7 +26,7 @@ class MyRepository(private val listDao: ListDao) {
     }
 
     //adds the list into the room database
-    private fun addList(result: List<ResponseClass>) {
+    private suspend fun addList(result: List<ResponseClass>) {
         for (i in 0..result.size - 1) {
             val listEntity =
                 ListEntity(result.get(i).image!!, result.get(i).title!!, result.get(i).subTitle!!)
@@ -37,5 +37,10 @@ class MyRepository(private val listDao: ListDao) {
     //livedata which provides the list of data present inside database
     fun displayList(): LiveData<List<ListEntity>> {
         return listDao.getList()
+    }
+
+    //use repository to call dao to delete the previous list_table
+    suspend fun deletePreviousList() {
+        listDao.deleteAll()
     }
 }

@@ -11,11 +11,18 @@ import com.rahul.nobrokerapp.room.ListEntity
  */
 class MyViewModel(private val repository: MyRepository) : ViewModel() {
 
+    //hit the api using kotlin coroutines
     suspend fun getApi() {
         repository.getList()
     }
 
+    //fetch all the data from database using livedata
     fun displayList(): LiveData<List<ListEntity>> {
         return repository.displayList()
+    }
+
+    //deletes all the record from database
+    suspend fun deleteList() {
+        repository.deletePreviousList()
     }
 }

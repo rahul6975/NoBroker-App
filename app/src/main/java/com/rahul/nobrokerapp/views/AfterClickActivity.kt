@@ -14,6 +14,11 @@ class AfterClickActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_after_click)
         getIntentData()
+
+        //finish the activity after clicking back button
+        imgBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getIntentData() {
@@ -28,5 +33,4 @@ class AfterClickActivity : AppCompatActivity() {
         textViewTitle.text = title
         textViewSubtitle.text = subtitle
     }
-
 }
