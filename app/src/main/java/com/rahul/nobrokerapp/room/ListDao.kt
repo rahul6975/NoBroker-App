@@ -11,7 +11,7 @@ interface ListDao {
 
     //adds the list into database
     @Insert
-    suspend fun addList(listEntity: ListEntity)
+     fun addList(listEntity: ListEntity)
 
     /*
    This will return a LiveData<List<ListEntity>> , so whenever the database is changed the observer
@@ -23,5 +23,5 @@ interface ListDao {
 
     //delete previous data present in database
     @Query("DELETE FROM list_table")
-    suspend fun deleteAll()
+     fun deleteAll()
 }

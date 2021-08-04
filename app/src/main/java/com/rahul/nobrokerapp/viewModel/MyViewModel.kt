@@ -22,7 +22,7 @@ class MyViewModel(private val repository: MyRepository) : ViewModel() {
     }
 
     //deletes all the record from database
-    suspend fun deleteList() {
+     fun deleteList() {
         repository.deletePreviousList()
     }
 }

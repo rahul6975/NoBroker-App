@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity(), ClickListener {
                     }
 
                 }
+
                 override fun afterTextChanged(s: Editable?) {
                 }
             })
