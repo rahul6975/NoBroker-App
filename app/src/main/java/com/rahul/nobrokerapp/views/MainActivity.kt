@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity(), ClickListener {
 
         //checks if internet access if available, if yes then call the api or else get data from database
 
-        val ConnectionManager =
+        val connectionManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = ConnectionManager.activeNetworkInfo
+        val networkInfo = connectionManager.activeNetworkInfo
         if (networkInfo != null && networkInfo.isConnected == true) {
 
             viewModel.displayList().observe(this, Observer {
